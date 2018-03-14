@@ -1,0 +1,57 @@
+﻿<Window x:Class="NovaSeqLimsTool.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NovaSeqLimsTool"
+        xmlns:views="clr-namespace:NovaSeqLimsTool.Views"
+        mc:Ignorable="d"
+        DataContext="{Binding Main, Source={StaticResource ViewModelLocator}}"
+        WindowState="Maximized"
+        Title="NovaSeq Lim Tool" Height="1000" Width="800">
+    <Window.Resources>
+        <ResourceDictionary>
+            <local:ErrorToVisibilityConverter x:Key="ErrorToVisibilityConverter"/>
+            <local:ErrorToBoolConverter x:Key="ErrorToBoolConverter"/>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10" >
+                <TextBlock Margin="0,0,20,0">Enter LIMS Url:</TextBlock>
+                <TextBox Width="150" x:Name="UrlTextBox" Text="{Binding LimsUrlAddress, UpdateSourceTrigger=PropertyChanged}"/>
+                <Button Width="100" Margin="20,0" Command="{Binding VerifyUrlCommand}" Content="Verify URL"/>
+            </StackPanel>
+            <TextBlock Grid.Row="1" Text="{Binding Error}" HorizontalAlignment="Center" Foreground="Red" 
+                       Visibility="{Binding Error, Converter={StaticResource ErrorToVisibilityConverter}}"/>
+        </Grid>
+        <TabControl Grid.Row="1" IsEnabled="{Binding Error, Converter={StaticResource ErrorToBoolConverter}}">
+            <TabItem Header="Login Url" >
+                <views:LoginUrlView />
+            </TabItem>
+            <TabItem Header="Login Page">
+                <views:LoginPageView LimsUri="{Binding LimsLoginUri}" LimsToken="{Binding LimsToken, Mode=TwoWay}" LimsUserName="{Binding LimsUserName, Mode=TwoWay}" />
+            </TabItem>
+            <TabItem Header="Get Recipe">
+                <views:GetRecipeView />
+            </TabItem>
+            <TabItem Header="Run Metrics">
+                <views:MetricsView/>
+            </TabItem>
+            <TabItem Header="Progress Update">
+                <views:ProgressUpdateView />
+            </TabItem>
+            <TabItem Header="Run All">
+                <views:RunAllView/>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
