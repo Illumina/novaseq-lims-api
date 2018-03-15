@@ -10,6 +10,7 @@ namespace NovaSeqLimsTool.ViewModels
     {
         #region Fields
         private string _progress;
+        private SequencingRunStatus _endingStatus;
         #endregion
 
         #region Properties
@@ -17,6 +18,11 @@ namespace NovaSeqLimsTool.ViewModels
         {
             get => _progress;
             set => SetProperty(ref _progress, value);
+        }
+        public SequencingRunStatus EndingStatus
+        {
+            get => _endingStatus;
+            set => SetProperty(ref _endingStatus, value);
         }
         #endregion
 
@@ -35,7 +41,10 @@ namespace NovaSeqLimsTool.ViewModels
         {
             try
             {
-                var srs = new SequencingRunStatusDto();
+                var srs = new SequencingRunStatusDto
+                {
+                    Status = EndingStatus
+                };
                 await _service.SendRunProgress(srs);
                 Progress = srs.ToString();
             }

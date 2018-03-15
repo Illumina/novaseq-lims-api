@@ -20,6 +20,6 @@
             <TextBox Width="150" Margin="0,0,10,0" Text="{Binding LibrarySerialNumber, Mode=TwoWay}"/>
             <Button Width="100" HorizontalAlignment="Center" Content="Get Recipe DTO" Command="{Binding GetRecipe}"/>
         </StackPanel>
-        <TextBlock Grid.Row="1" Text="{Binding RecipeDto}" HorizontalAlignment="Center" Foreground="SpringGreen"/>
+        <TextBlock Grid.Row="1" Text="{Binding RecipeDto}" HorizontalAlignment="Center" FontSize="14" />
     </Grid>
 </UserControl>

@@ -36,7 +36,7 @@
             <Button Width="100" HorizontalAlignment="Center" Content="Stop" Command="{Binding StopRunningCommand}"/>
         </StackPanel>
         <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" >
-            <TextBlock Text="{Binding CurrentDto}" Height="Auto" TextWrapping="Wrap" TextAlignment="Justify" Width="500" HorizontalAlignment="Center" Foreground="SpringGreen" AllowDrop="False"/>
+            <TextBlock Text="{Binding CurrentDto}" Height="Auto" TextWrapping="Wrap" TextAlignment="Justify" Width="500" HorizontalAlignment="Center" FontSize="14" AllowDrop="False"/>
         </ScrollViewer>
     </Grid>
 </UserControl>
